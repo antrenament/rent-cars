@@ -12,6 +12,7 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
-    "start": "nodemon src/"
+    "start": "nodemon src/index.ts",
+    "build": "tsc -p ./"
   }
 }
