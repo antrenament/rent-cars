@@ -1,4 +1,8 @@
-import { GraphQLObjectType, GraphQLString, GraphQLSchema } from 'graphql'
+import {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLSchema
+} from 'graphql'
 
 const query = new GraphQLObjectType({
   name: "Query",

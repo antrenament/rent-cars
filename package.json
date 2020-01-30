@@ -4,7 +4,7 @@
   "description": "Find cars to rent",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server/index.ts",
+    "start": "nodemon src/server/index.ts",
     "server": "nodemon src/server/index.ts",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "build": "tsc -p ./",
@@ -15,7 +15,6 @@
   "dependencies": {
     "apollo-server-express": "^2.9.16",
     "body-parser": "^1.19.0",
-    "esm": "^3.2.25",
     "express": "^4.17.1",
     "graphql": "^14.6.0",
     "react": "^16.12.0",
