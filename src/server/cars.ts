@@ -1,4 +1,4 @@
-interface Dummy {
+interface Car {
     id: string;
     title: string;
     image: string;
@@ -10,7 +10,7 @@ interface Dummy {
     rating: number;
 }
 
-export const dummyData: Dummy[] = [
+export const cars: Car[] = [
     {
         id: "001",
         title:
