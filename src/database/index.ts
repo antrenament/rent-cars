@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb'
+import { Database } from '../lib/types'
 
 const user = process.env.REACT_APP_USER
 const password = process.env.REACT_APP_PASSWORD
@@ -6,7 +7,7 @@ const cluster = process.env.REACT_APP_CLUSTER
 
 const url = `mongodb+srv://${user}:${password}@${cluster}.gcp.mongodb.net/test?retryWrites=true&w=majority`
 
-export const connectDatabase = async () => {
+export const connectDatabase = async (): Promise<Database> => {
   const client = await MongoClient.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
