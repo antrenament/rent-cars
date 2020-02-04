@@ -8,7 +8,7 @@ export interface Cars {
   price: number
   numOfGuests: number
   numOfBeds: number
-  numOfBats: number
+  numOfBaths: number
   rating: number
 }
 
