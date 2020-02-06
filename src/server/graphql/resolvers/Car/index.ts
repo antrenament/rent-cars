@@ -1,8 +1,8 @@
 import { IResolvers } from 'apollo-server-express'
-import { Database, Car } from '../../lib/types'
+import { Database, Car } from '../../../../lib/types'
 import { ObjectId } from 'mongodb'
 
-export const resolvers: IResolvers = {
+export const carResolvers: IResolvers = {
   Query: {
     cars: async (
       _root: undefined,
