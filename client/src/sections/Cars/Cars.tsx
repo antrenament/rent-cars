@@ -1,5 +1,5 @@
 import React from 'react'
 
-export const Cars = () => {
-  return <h2> Rent Cars</h2>
+export const Cars = ({ title }: any) => {
+  return <h2> {title} </h2>
 }

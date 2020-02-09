@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import * as serviceWorker from './serviceWorker'
 import { Cars } from './sections'
 
-render(<Cars />, document.getElementById('root'))
+render(<Cars title='Rent Cars' />, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
