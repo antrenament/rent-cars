@@ -1,4 +1,4 @@
-interface Car {
+export interface Car {
   id: string
   ttle: string
   image: string
