@@ -11,3 +11,11 @@ interface Car {
 export interface CarsData {
   cars: Car[]
 }
+
+export interface DeleteCar {
+  deleteCar: Car
+}
+
+export interface DeleteCarVariables {
+  id: string
+}
