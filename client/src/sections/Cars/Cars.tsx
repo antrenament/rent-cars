@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { server } from '../../lib/api'
 import { CarsData, DeleteCar, DeleteCarVariables, Car } from './types'
 
@@ -31,25 +31,35 @@ interface Props {
 export const Cars = ({ title }: Props) => {
   const [cars, setCars] = useState<Car[] | null>(null)
 
+  useEffect(() => {
+    fetchCars()
+  }, [])
+
   const fetchCars = async () => {
     const { data } = await server.fetch<CarsData>({ query: CARS })
     setCars(data.cars)
   }
 
-  const deleteCar = async () => {
-    const { data } = await server.fetch<DeleteCar, DeleteCarVariables>({
+  const deleteCar = async (id: string) => {
+    await server.fetch<DeleteCar, DeleteCarVariables>({
       query: DELETE_CAR,
       variables: {
-        id: '5e39fcf6fcd63610a6204827'
+        id
       }
     })
+    fetchCars()
   }
 
   const carList = cars ? (
     <ul>
+      {console.log(cars)}
       {cars &&
         cars.map(car => {
-          return <li key={car.id}>{car.title}</li>
+          return (
+            <li key={car.id} onClick={() => deleteCar(car.id)}>
+              {car.title}
+            </li>
+          )
         })}
     </ul>
   ) : null
@@ -58,8 +68,6 @@ export const Cars = ({ title }: Props) => {
     <div>
       <h2> {title} </h2>
       {carList}
-      <button onClick={fetchCars}>Querry Cars</button>
-      <button onClick={deleteCar}>Delete a Car</button>
     </div>
   )
 }

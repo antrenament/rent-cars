@@ -1,6 +1,6 @@
 export interface Car {
   id: string
-  ttle: string
+  title: string
   image: string
   price: number
   numOfGuests: number
