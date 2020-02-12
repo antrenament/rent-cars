@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { server } from '../../lib/api'
 import { CarsData, DeleteCar, DeleteCarVariables, Car } from './types'
+import { useQuery } from './../../lib/api'
 
 const CARS = `
   query Cars {
@@ -29,17 +30,9 @@ interface Props {
 }
 
 export const Cars = ({ title }: Props) => {
-  const [cars, setCars] = useState<Car[] | null>(null)
+  const { data, refetch } = useQuery<CarsData>(CARS)
 
-  useEffect(() => {
-    fetchCars()
-  }, [])
-
-  const fetchCars = async () => {
-    const { data } = await server.fetch<CarsData>({ query: CARS })
-    setCars(data.cars)
-  }
-
+  console.log(data)
   const deleteCar = async (id: string) => {
     await server.fetch<DeleteCar, DeleteCarVariables>({
       query: DELETE_CAR,
@@ -47,8 +40,10 @@ export const Cars = ({ title }: Props) => {
         id
       }
     })
-    fetchCars()
+    refetch()
   }
+
+  const cars = data ? data.cars : null
 
   const carList = cars ? (
     <ul>
