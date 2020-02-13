@@ -30,7 +30,7 @@ interface Props {
 }
 
 export const Cars = ({ title }: Props) => {
-  const { data, refetch } = useQuery<CarsData>(CARS)
+  const { data, loading, refetch } = useQuery<CarsData>(CARS)
 
   console.log(data)
   const deleteCar = async (id: string) => {
@@ -58,6 +58,10 @@ export const Cars = ({ title }: Props) => {
         })}
     </ul>
   ) : null
+
+  if (loading) {
+    return <h2>Loading..</h2>
+  }
 
   return (
     <div>
