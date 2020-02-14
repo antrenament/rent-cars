@@ -20,6 +20,7 @@ export const useMutation = <TData = any, TVariables = any>(
     loading: false,
     error: false
   })
+
   const fetch = async (variables?: TVariables) => {
     try {
       setState({ data: null, loading: true, error: false })

@@ -1,6 +1,6 @@
 import React from 'react'
 import { CarsData, DeleteCarData, DeleteCarVariables, Car } from './types'
-import { useQuery, useMutation } from './../../lib/api'
+import { server, useQuery, useMutation } from './../../lib/api'
 
 const CARS = `
   query Cars {
@@ -34,7 +34,7 @@ export const Cars = ({ title }: Props) => {
   const [
     deleteCar,
     { loading: deleteCarLoading, error: deleteCarError }
-  ] = useMutation<DeleteCarData, DeleteCarVariables>('DELETE_CAR')
+  ] = useMutation<DeleteCarData, DeleteCarVariables>(DELETE_CAR)
 
   const handleDeleteCar = async (id: string) => {
     await deleteCar({ id })
@@ -79,6 +79,7 @@ export const Cars = ({ title }: Props) => {
       <h2> {title} </h2>
       {carList}
       {deleteCarLoadingMessage}
+      {deleteCarErrorMessage}
     </div>
   )
 }
