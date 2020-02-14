@@ -12,7 +12,7 @@ export interface CarsData {
   cars: Car[]
 }
 
-export interface DeleteCar {
+export interface DeleteCarData {
   deleteCar: Car
 }
 

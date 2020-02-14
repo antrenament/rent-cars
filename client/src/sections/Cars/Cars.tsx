@@ -1,7 +1,6 @@
 import React from 'react'
-import { server } from '../../lib/api'
-import { CarsData, DeleteCar, DeleteCarVariables, Car } from './types'
-import { useQuery } from './../../lib/api'
+import { CarsData, DeleteCarData, DeleteCarVariables, Car } from './types'
+import { useQuery, useMutation } from './../../lib/api'
 
 const CARS = `
   query Cars {
@@ -32,14 +31,13 @@ interface Props {
 export const Cars = ({ title }: Props) => {
   const { data, loading, error, refetch } = useQuery<CarsData>(CARS)
 
-  console.log(data)
-  const deleteCar = async (id: string) => {
-    await server.fetch<DeleteCar, DeleteCarVariables>({
-      query: DELETE_CAR,
-      variables: {
-        id
-      }
-    })
+  const [
+    deleteCar,
+    { loading: deleteCarLoading, error: deleteCarError }
+  ] = useMutation<DeleteCarData, DeleteCarVariables>('DELETE_CAR')
+
+  const handleDeleteCar = async (id: string) => {
+    await deleteCar({ id })
     refetch()
   }
 
@@ -47,11 +45,10 @@ export const Cars = ({ title }: Props) => {
 
   const carList = cars ? (
     <ul>
-      {console.log(cars)}
       {cars &&
         cars.map(car => {
           return (
-            <li key={car.id} onClick={() => deleteCar(car.id)}>
+            <li key={car.id} onClick={() => handleDeleteCar(car.id)}>
               {car.title}
             </li>
           )
@@ -67,10 +64,21 @@ export const Cars = ({ title }: Props) => {
     return <h2> Uh oh! Something went wrong - please try again later</h2>
   }
 
+  const deleteCarLoadingMessage = deleteCarLoading ? (
+    <h4>Deletition in progress...</h4>
+  ) : null
+
+  const deleteCarErrorMessage = deleteCarError ? (
+    <h4>
+      Uh oH! Something went wrong with deleting : please try again later :()
+    </h4>
+  ) : null
+
   return (
     <div>
       <h2> {title} </h2>
       {carList}
+      {deleteCarLoadingMessage}
     </div>
   )
 }
