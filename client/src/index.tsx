@@ -1,7 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
+import ApolloClient from 'apollo-boost'
 import * as serviceWorker from './serviceWorker'
 import { Cars } from './sections'
+
+const client = new ApolloClient({
+  uri: '/api'
+})
 
 render(<Cars title='Rent Cars' />, document.getElementById('root'))
 
