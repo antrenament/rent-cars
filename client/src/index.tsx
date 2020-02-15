@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from 'react-apollo'
 import * as serviceWorker from './serviceWorker'
 import { Cars } from './sections'
 
@@ -8,7 +9,12 @@ const client = new ApolloClient({
   uri: '/api'
 })
 
-render(<Cars title='Rent Cars' />, document.getElementById('root'))
+render(
+  <ApolloProvider client={client}>
+    <Cars title='Rent Cars' />
+  </ApolloProvider>,
+  document.getElementById('root')
+)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
