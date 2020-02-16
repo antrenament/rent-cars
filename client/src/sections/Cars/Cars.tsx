@@ -1,8 +1,9 @@
 import React from 'react'
+import { gql } from 'apollo-boost'
 import { CarsData, DeleteCarData, DeleteCarVariables, Car } from './types'
-import { server, useQuery, useMutation } from './../../lib/api'
+import { useQuery, useMutation } from 'react-apollo'
 
-const CARS = `
+const CARS = gql`
   query Cars {
     cars {
       id
@@ -17,12 +18,13 @@ const CARS = `
   }
 `
 
-const DELETE_CAR = `
-mutation DeleteCar($id: ID!) {
-  deleteCar(id: $id) {
-    id
+const DELETE_CAR = gql`
+  mutation DeleteCar($id: ID!) {
+    deleteCar(id: $id) {
+      id
+    }
   }
-}`
+`
 
 interface Props {
   title: string
@@ -37,7 +39,7 @@ export const Cars = ({ title }: Props) => {
   ] = useMutation<DeleteCarData, DeleteCarVariables>(DELETE_CAR)
 
   const handleDeleteCar = async (id: string) => {
-    await deleteCar({ id })
+    await deleteCar({ variables: { id } })
     refetch()
   }
 
