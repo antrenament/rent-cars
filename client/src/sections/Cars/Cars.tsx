@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost'
 import { useQuery, useMutation } from 'react-apollo'
 import {Cars as CarsData} from './__generated__/Cars'
 import {DeleteCar as DeleteCarData, DeleteCarVariables} from './__generated__/DeleteCar'
-
+import List from 'antd/es/list'
 
 const CARS = gql`
   query Cars {
@@ -48,16 +48,14 @@ export const Cars = ({ title }: Props) => {
   const cars = data ? data.cars : null
 
   const carList = cars ? (
-    <ul>
-      {cars &&
-        cars.map(car => {
-          return (
-            <li key={car.id} onClick={() => handleDeleteCar(car.id)}>
-              {car.title}
-            </li>
-          )
-        })}
-    </ul>
+    <List 
+    itemLayout="horizontal" 
+    dataSource={cars} 
+    renderItem={car => (
+      <List.Item>
+        <List.Item.Meta title={car.title} />
+      </List.Item>
+    )}/>
   ) : null
 
   if (loading) {
