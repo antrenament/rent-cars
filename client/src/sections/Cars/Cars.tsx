@@ -1,7 +1,9 @@
 import React from 'react'
 import { gql } from 'apollo-boost'
-import { CarsData, DeleteCarData, DeleteCarVariables, Car } from './types'
 import { useQuery, useMutation } from 'react-apollo'
+import {Cars as CarsData} from './__generated__/Cars'
+import {DeleteCar as DeleteCarData, DeleteCarVariables} from './__generated__/DeleteCar'
+
 
 const CARS = gql`
   query Cars {
