@@ -1,9 +1,13 @@
 import React from 'react'
 import { gql } from 'apollo-boost'
 import { useQuery, useMutation } from 'react-apollo'
+import Avatar from 'antd/es/avatar'
+import Button from 'antd/es/button'
 import {Cars as CarsData} from './__generated__/Cars'
 import {DeleteCar as DeleteCarData, DeleteCarVariables} from './__generated__/DeleteCar'
 import List from 'antd/es/list'
+import './../../styles/Cars.css'
+
 
 const CARS = gql`
   query Cars {
@@ -52,8 +56,23 @@ export const Cars = ({ title }: Props) => {
     itemLayout="horizontal" 
     dataSource={cars} 
     renderItem={car => (
-      <List.Item>
-        <List.Item.Meta title={car.title} />
+      <List.Item actions={[
+      <Button 
+      onClick={() => 
+        handleDeleteCar(car.id)
+      }
+    > Delete 
+    </Button>
+  ]}>
+        <List.Item.Meta 
+        title={car.title} 
+        description={car.address} 
+        avatar={
+        <Avatar 
+          src={car.image} 
+          shape='square' 
+          size={48} />
+        }/>
       </List.Item>
     )}/>
   ) : null
@@ -77,7 +96,7 @@ export const Cars = ({ title }: Props) => {
   ) : null
 
   return (
-    <div>
+    <div className='cars'>
       <h2> {title} </h2>
       {carList}
       {deleteCarLoadingMessage}
