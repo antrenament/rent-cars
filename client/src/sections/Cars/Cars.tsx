@@ -1,13 +1,14 @@
 import React from 'react'
 import { gql } from 'apollo-boost'
 import { useQuery, useMutation } from 'react-apollo'
-import Avatar from 'antd/es/avatar'
-import Button from 'antd/es/button'
-import {Cars as CarsData} from './__generated__/Cars'
-import {DeleteCar as DeleteCarData, DeleteCarVariables} from './__generated__/DeleteCar'
-import List from 'antd/es/list'
-import './../../styles/Cars.css'
-
+import { Avatar, Button, List, Spin } from 'antd'
+import { Cars as CarsData } from './__generated__/Cars'
+import {
+  DeleteCar as DeleteCarData,
+  DeleteCarVariables
+} from './__generated__/DeleteCar'
+import './styles/Cars.css'
+import { CarsSkeleton } from './components'
 
 const CARS = gql`
   query Cars {
@@ -52,42 +53,40 @@ export const Cars = ({ title }: Props) => {
   const cars = data ? data.cars : null
 
   const carList = cars ? (
-    <List 
-    itemLayout="horizontal" 
-    dataSource={cars} 
-    renderItem={car => (
-      <List.Item actions={[
-      <Button 
-      onClick={() => 
-        handleDeleteCar(car.id)
-      }
-    > Delete 
-    </Button>
-  ]}>
-        <List.Item.Meta 
-        title={car.title} 
-        description={car.address} 
-        avatar={
-        <Avatar 
-          src={car.image} 
-          shape='square' 
-          size={48} />
-        }/>
-      </List.Item>
-    )}/>
+    <List
+      itemLayout='horizontal'
+      dataSource={cars}
+      renderItem={car => (
+        <List.Item
+          actions={[
+            <Button onClick={() => handleDeleteCar(car.id)}> Delete</Button>
+          ]}
+        >
+          <List.Item.Meta
+            title={car.title}
+            description={car.address}
+            avatar={<Avatar src={car.image} shape='square' size={48} />}
+          />
+        </List.Item>
+      )}
+    />
   ) : null
 
   if (loading) {
-    return <h2>Loading..</h2>
+    return (
+      <div className='cars'>
+        <CarsSkeleton title={title} error />
+      </div>
+    )
   }
 
   if (error) {
-    return <h2> Uh oh! Something went wrong - please try again later</h2>
+    return (
+      <div className='cars'>
+        <CarsSkeleton title={title} error />
+      </div>
+    )
   }
-
-  const deleteCarLoadingMessage = deleteCarLoading ? (
-    <h4>Deletition in progress...</h4>
-  ) : null
 
   const deleteCarErrorMessage = deleteCarError ? (
     <h4>
@@ -97,10 +96,11 @@ export const Cars = ({ title }: Props) => {
 
   return (
     <div className='cars'>
-      <h2> {title} </h2>
-      {carList}
-      {deleteCarLoadingMessage}
-      {deleteCarErrorMessage}
+      <Spin spinning={deleteCarLoading}>
+        <h2> {title} </h2>
+        {carList}
+        {deleteCarErrorMessage}
+      </Spin>
     </div>
   )
 }
