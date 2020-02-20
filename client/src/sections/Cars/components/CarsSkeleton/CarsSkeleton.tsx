@@ -12,6 +12,7 @@ export const CarsSkeleton = ({ title, error = false }: Props) => {
     <Alert
       type='error'
       message='Uh oh! Something went wrong - please try again later :('
+      className='cars-skeleton__alert'
     />
   ) : null
   return (

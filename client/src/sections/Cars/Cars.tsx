@@ -1,7 +1,7 @@
 import React from 'react'
 import { gql } from 'apollo-boost'
 import { useQuery, useMutation } from 'react-apollo'
-import { Avatar, Button, List, Spin } from 'antd'
+import { Alert, Avatar, Button, List, Spin } from 'antd'
 import { Cars as CarsData } from './__generated__/Cars'
 import {
   DeleteCar as DeleteCarData,
@@ -88,18 +88,20 @@ export const Cars = ({ title }: Props) => {
     )
   }
 
-  const deleteCarErrorMessage = deleteCarError ? (
-    <h4>
-      Uh oH! Something went wrong with deleting : please try again later :()
-    </h4>
+  const deleteCarErrorAlert = deleteCarError ? (
+    <Alert
+      type='error'
+      message='Uh oh! Something went wrong - please try again later :('
+      className='cars__alert'
+    />
   ) : null
 
   return (
     <div className='cars'>
       <Spin spinning={deleteCarLoading}>
+        {deleteCarErrorAlert}
         <h2> {title} </h2>
         {carList}
-        {deleteCarErrorMessage}
       </Spin>
     </div>
   )
