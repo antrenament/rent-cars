@@ -7,7 +7,6 @@ import {
   DeleteCar as DeleteCarData,
   DeleteCarVariables
 } from './__generated__/DeleteCar'
-import './styles/Cars.css'
 import { CarsSkeleton } from './components'
 
 const CARS = gql`
@@ -74,7 +73,7 @@ export const Cars = ({ title }: Props) => {
 
   if (loading) {
     return (
-      <div className='cars'>
+      <div className='listings'>
         <CarsSkeleton title={title} error />
       </div>
     )
@@ -82,7 +81,7 @@ export const Cars = ({ title }: Props) => {
 
   if (error) {
     return (
-      <div className='cars'>
+      <div className='listings'>
         <CarsSkeleton title={title} error />
       </div>
     )
@@ -92,12 +91,12 @@ export const Cars = ({ title }: Props) => {
     <Alert
       type='error'
       message='Uh oh! Something went wrong - please try again later :('
-      className='cars__alert'
+      className='listings__alert'
     />
   ) : null
 
   return (
-    <div className='cars'>
+    <div className='listings'>
       <Spin spinning={deleteCarLoading}>
         {deleteCarErrorAlert}
         <h2> {title} </h2>
