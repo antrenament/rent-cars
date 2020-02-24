@@ -1,13 +1,13 @@
 import React from 'react'
 import { Alert, Skeleton, Divider } from 'antd'
-import './styles/CarsSkeleton.css'
+import './styles/ListingsSkeleton.css'
 
 interface Props {
   title: string
   error: boolean
 }
 
-export const CarsSkeleton = ({ title, error = false }: Props) => {
+export const ListingsSkeleton = ({ title, error = false }: Props) => {
   const errorAlert = error ? (
     <Alert
       type='error'

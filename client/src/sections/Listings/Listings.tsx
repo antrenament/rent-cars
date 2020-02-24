@@ -7,7 +7,7 @@ import {
   DeleteCar as DeleteCarData,
   DeleteCarVariables
 } from './__generated__/DeleteCar'
-import { CarsSkeleton } from './components'
+import { ListingsSkeleton } from './components'
 
 const CARS = gql`
   query Cars {
@@ -36,7 +36,7 @@ interface Props {
   title: string
 }
 
-export const Cars = ({ title }: Props) => {
+export const Listings = ({ title }: Props) => {
   const { data, loading, error, refetch } = useQuery<CarsData>(CARS)
 
   const [
@@ -74,7 +74,7 @@ export const Cars = ({ title }: Props) => {
   if (loading) {
     return (
       <div className='listings'>
-        <CarsSkeleton title={title} error />
+        <ListingsSkeleton title={title} error />
       </div>
     )
   }
@@ -82,7 +82,7 @@ export const Cars = ({ title }: Props) => {
   if (error) {
     return (
       <div className='listings'>
-        <CarsSkeleton title={title} error />
+        <ListingsSkeleton title={title} error />
       </div>
     )
   }

@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 import * as serviceWorker from './serviceWorker'
-import { Cars } from './sections'
+import { Listings } from './sections'
 import './styles/index.css'
 
 const client = new ApolloClient({
@@ -12,7 +12,7 @@ const client = new ApolloClient({
 
 render(
   <ApolloProvider client={client}>
-    <Cars title='Rent Cars' />
+    <Listings title='Rent Cars' />
   </ApolloProvider>,
   document.getElementById('root')
 )
