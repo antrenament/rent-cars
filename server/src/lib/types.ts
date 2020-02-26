@@ -1,6 +1,6 @@
 import { ObjectId, Collection } from 'mongodb'
 
-export interface Car {
+export interface Listing {
   _id: ObjectId
   title: string
   image: string
@@ -12,6 +12,11 @@ export interface Car {
   rating: number
 }
 
+export interface User {
+  _id: ObjectId;
+}
+
 export interface Database {
-  cars: Collection<Cars>
+  listings: Collection<Listing>;
+  users: Collection<User>
 }
