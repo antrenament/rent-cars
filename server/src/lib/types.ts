@@ -1,15 +1,10 @@
 import { ObjectId, Collection } from 'mongodb'
 
-export interface Listing {
+export interface Booking {
   _id: ObjectId
-  title: string
-  image: string
-  address: string
-  price: number
-  numOfGuests: number
-  numOfBeds: number
-  numOfBaths: number
-  rating: number
+}
+export interface Listing {
+  _id: ObjectId;
 }
 
 export interface User {
@@ -17,6 +12,7 @@ export interface User {
 }
 
 export interface Database {
-  listings: Collection<Listing>;
+  booking: Collection<Booking>
+  listings: Collection<Listing>
   users: Collection<User>
 }
