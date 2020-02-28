@@ -8,7 +8,7 @@ export interface Listing {
 }
 
 export interface User {
-  _id: ObjectId;
+  _id: string;
 }
 
 export interface Database {
