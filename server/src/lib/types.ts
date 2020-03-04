@@ -7,7 +7,7 @@ export enum ListingType {
 }
 
 export interface BookingIndexMonth {
-  [key: string]: Boolean
+  [key: string]: boolean
 }
 
 export interface BookingsIndexYear {
@@ -21,7 +21,7 @@ export interface BookingsIndex {
 export interface Booking {
   _id: ObjectId;
   listing: ObjectId;
-  renter: string;
+  client: string;
   checkIn: string;
   checkOut: string;
 }
@@ -37,9 +37,9 @@ export interface Listing {
   admin: string;
   city: string;
   bookings: ObjectId[];
-  model: string;
-  year: number;
-  milage: number;
+  model?: string;
+  year?: number;
+  milage?: number;
   bookingsIndex: BookingsIndex;
   price: number;
   seats: number;
@@ -58,7 +58,7 @@ export interface User {
 }
 
 export interface Database {
-  booking: Collection<Booking>
-  listings: Collection<Listing>
-  users: Collection<User>
+  bookings: Collection<Booking>;
+  listings: Collection<Listing>;
+  users: Collection<User>;
 }
