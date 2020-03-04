@@ -1,4 +1,4 @@
 import merge from 'lodash.merge'
-import { carResolvers } from './Car'
+import { listingResolvers } from './Listing'
 
-export const resolvers = merge(carResolvers)
+export const resolvers = merge(listingResolvers)
